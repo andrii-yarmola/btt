@@ -6,7 +6,7 @@ const AdminForm = React.createClass({
       <form className="login-form" encType="multipart/form-data" method="POST" action="server/php/" >
         <div className="row">
           <div className="col-xs-4 col-xs-offset-4">
-            <h1>Login</h1>
+            <h1>!11Login</h1>
             <div className="form-row">
               <input type="text" className="form-control" placeholder="Your Login" data-required="true"></input>
               <span className="error-message">Something is wrong here...</span>
