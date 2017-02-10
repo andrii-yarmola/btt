@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 // increment
 export function increment(index) {
   return {
@@ -23,5 +25,13 @@ export function removeComment(postId, i) {
     type: 'REMOVE_COMMENT',
     i,
     postId
+  }
+}
+
+
+// async actions
+export function userSignupRequest(userData) {
+  return dispatch => {
+    return axios.post('/api/users', userData)
   }
 }

@@ -1,21 +1,20 @@
 import React from 'react'
-import Header from '../header/header'
- import  MainContent from '../mainContent/mainContent'
+import AdminForm from '../adminLoginForm/form'
 
 
-const Main = React.createClass({
+class LoginPage extends React.Component {
   render() {
+    const { userSignupRequest } = this.props;
     return (
-      <div id="page">
-        <div className="container">
-          <div className="wrapper">
-            <Header/>
-            <MainContent/>
+      <main className="main">
+        <div className="content">
+          <div className="container container-narrow">
+            <AdminForm userSignupRequest={userSignupRequest}/>
           </div>
         </div>
-      </div>
+      </main>
     )
   }
-});
+};
 
-export default Main;
+export default LoginPage;
