@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 
 class AdminForm extends React.Component {
   constructor(props) {
@@ -6,8 +7,10 @@ class AdminForm extends React.Component {
     this.state = {
       username: '',
       password: '',
-      errors: {}
+      errors: {},
+      isLoading: false
     }
+    
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -17,11 +20,11 @@ class AdminForm extends React.Component {
   }
   
   onSubmit(e) {
-    this.setState({ errors: {} });
+    this.setState({ errors: {}, isLoading: true });
     e.preventDefault();
     this.props.userSignupRequest(this.state).then(
       () => {},
-      (err) => this.setState({ errors: err.response.data })
+      (err) => this.setState({ errors: err.response.data, isLoading: false })
     );
   }
   
@@ -38,7 +41,7 @@ class AdminForm extends React.Component {
                 onChange={this.onChange}
                 name="username"
                 type="text"
-                className="form-control"
+                className={classnames("form-control", { 'error': errors.username })}
                 placeholder="Your Login"
                 data-required="true"
               />
@@ -49,11 +52,11 @@ class AdminForm extends React.Component {
                 value={this.state.password}
                 onChange={this.onChange}
                 name="password"
-                className="form-control"
+                className={classnames("form-control", { 'error': errors.password })}
                 placeholder="Your Password"
                 data-required="true"
               />
-              {errors.password && <span className="error-message">{errors.username}</span>}
+              {errors.password && <span className="error-message">{errors.password}</span>}
               <div className="forgot-link">
                 <a href="#">Forgot your password?</a>
               </div>
@@ -63,7 +66,11 @@ class AdminForm extends React.Component {
               <label htmlFor="remember-box">Remember me</label>
             </div>
             <div className="form-row submit-row">
-              <input className="btn btn-primary" type="submit" value="Login"></input>
+              <input className="btn btn-primary"
+                type="submit"
+                value="Login"
+                disabled={this.state.isLoading}
+              />
             </div>
           </div>
         </div>
